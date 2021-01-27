@@ -15,13 +15,13 @@ endif ()
 
 add_library(
   3DCPPhysics SHARED
-  ${CMAKE_CURRENT_LIST_DIR}/source/PhysicsObject.cpp
-  ${CMAKE_CURRENT_LIST_DIR}/source/Shapes/AABB.cpp
-  ${CMAKE_CURRENT_LIST_DIR}/source/Shapes/OBB.cpp
-  ${CMAKE_CURRENT_LIST_DIR}/source/Shapes/Capsule.cpp
-  ${CMAKE_CURRENT_LIST_DIR}/source/Shapes/Raycasting.cpp
-  ${CMAKE_CURRENT_LIST_DIR}/source/Shapes/Sphere.cpp
-  ${CMAKE_CURRENT_LIST_DIR}/source/Maths/Quaternion.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/sources/PhysicsObject.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/sources/Shapes/AABB.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/sources/Shapes/OBB.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/sources/Shapes/Capsule.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/sources/Shapes/Raycasting.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/sources/Shapes/Sphere.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/sources/Maths/Quaternion.cpp
 )
 
 target_compile_definitions(
@@ -33,5 +33,28 @@ target_compile_definitions(
 target_include_directories(
     3DCPPhysics PRIVATE
 
-  ${CMAKE_CURRENT_LIST_DIR}/source
+  ${CMAKE_CURRENT_LIST_DIR}/sources
+)
+
+add_executable(
+  example_OpenGL
+
+  ${CMAKE_CURRENT_LIST_DIR}/examples/Camera.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/examples/OpenGL.cpp
+)
+
+target_include_directories(
+  example_OpenGL PRIVATE
+
+  ${CMAKE_CURRENT_LIST_DIR}/sources
+  ${CMAKE_CURRENT_LIST_DIR}/examples
+)
+
+target_link_libraries(
+  example_OpenGL PRIVATE
+
+  GL
+  glut
+  GLU
+  3DCPPhysics
 )
